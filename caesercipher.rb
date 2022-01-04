@@ -12,37 +12,26 @@
 # upper case range = 65 -- 90 
 # lower case range = 97 -- 122
 
-def caesar_cipher(string, shift_value)
-    ord_arr = string.split("").map {|char| char.ord}
+class CaesarCipher
+    def caesar_cipher(string, shift_value)
+        ord_arr = string.split("").map {|char| char.ord}
+        
     
-
-    shifted_arr = ord_arr.map do |char|
-        if char.between?(65,90)
-            if shift_value.positive?
+        shifted_arr = ord_arr.map do |char|
+            if char.between?(65,90)
                 (((char - 65) + shift_value) % 26) + 65
-            else
-                (((char - 65) - shift_value) % 26) + 65
-            end
-        elsif char.between?(97,122)
-            if shift_value.positive?
+            elsif char.between?(97,122)
                 (((char - 97) + shift_value) % 26) + 97
             else
-                (((char - 97) - shift_value) % 26) + 97
+                char
             end
-        else
-            char
         end
-    end
-
-    ciphered_string = shifted_arr.map {|char| char.chr}.join
-    p ciphered_string
     
+        ciphered_string = shifted_arr.map {|char| char.chr}.join
+        ciphered_string
+        
+    end
 end
 
-print "Please enter text to encode with Caeser Cipher:"
-string = gets.chomp
 
-print "Please enter the shift factor (+ or -)"
-shift_value = gets.chomp.to_i
 
-caesar_cipher(string,shift_value)
